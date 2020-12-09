@@ -1,0 +1,13 @@
+[package]
+name = "aoc-challenges"
+version = "0.1.0"
+authors = ["Michael-F-Bryan <michaelfbryan@gmail.com>"]
+license = "MIT OR Apache-2.0"
+edition = "2018"
+
+[dependencies]
+anyhow = "1.0.35"
+aoc-core = {path = "../core"}
+aoc-macros = {path = "../macros"}
+inventory = "0.1.9"
+structopt = "0.3.21"
