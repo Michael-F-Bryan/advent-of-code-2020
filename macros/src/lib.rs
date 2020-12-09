@@ -57,6 +57,13 @@ fn parse_doc_comment(docs: &str) -> Result<(&str, &str, &str), Error> {
         Regex::new(r"(?i)day ([\d\w]+)\s*:\s*([\w \d]+)").unwrap()
     });
 
+    if docs.is_empty() {
+        return Err(Error::new(
+            Span::call_site(),
+            "Challenges must use doc-comments for their name and description",
+        ));
+    }
+
     let captures = match PATTERN.captures(docs) {
         Some(c) => c,
         None => {

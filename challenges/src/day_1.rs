@@ -107,6 +107,7 @@ pub fn part_2(text: Lines<u32>) -> Result<u32, Error> {
 
             for k in j..values.len() {
                 let third = values[k];
+
                 if first + second + third == 2020 {
                     return Ok(first * second * third);
                 }
