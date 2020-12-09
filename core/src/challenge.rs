@@ -1,0 +1,45 @@
+use anyhow::Error;
+use std::fmt::{self, Debug, Formatter};
+
+#[derive(Debug, Copy, Clone)]
+pub struct Example {
+    pub input: &'static str,
+    pub expected: &'static str,
+}
+
+pub fn all_challenges() -> impl Iterator<Item = &'static Challenge> {
+    let mut challenges: Vec<_> =
+        inventory::iter::<Challenge>.into_iter().collect();
+    challenges.sort_by_key(|c| c.number);
+    challenges.into_iter()
+}
+
+#[derive(Copy, Clone)]
+pub struct Challenge {
+    pub number: &'static str,
+    pub name: &'static str,
+    pub description: &'static str,
+    pub examples: &'static [Example],
+    pub solve: fn(&str) -> Result<String, Error>,
+}
+
+inventory::collect!(Challenge);
+
+impl Debug for Challenge {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        let Challenge {
+            number: day,
+            name,
+            description,
+            examples,
+            ..
+        } = self;
+
+        f.debug_struct("Challenge")
+            .field("day", day)
+            .field("name", name)
+            .field("description", description)
+            .field("examples", examples)
+            .finish()
+    }
+}
