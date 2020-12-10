@@ -18,8 +18,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          # TODO: remove the space between "{ {"
-          toolchain: ${ { matrix.rust }}
+          toolchain: ${{ matrix.rust }}
           override: true
       - uses: actions-rs/cargo@v1
         with:
@@ -46,25 +45,19 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          # TODO: remove the space between "{ {"
-          toolchain: ${ { matrix.rust }}
+          toolchain: ${{ matrix.rust }}
           override: true
       - uses: actions-rs/cargo@v1
         with:
           command: doc
           args: --all --verbose
       - name: Redirect top-level GitHub Pages
-        run: "echo '<meta http-equiv=\"refresh\" content=\"0; url=advent_of_code_2020/index.html\" />' > target/doc/index.html"
+        run: "echo '<meta http-equiv=\"refresh\" content=\"0; url=aoc_challenges/index.html\" />' > target/doc/index.html"
         shell: bash
       - name: GitHub Pages
         uses: crazy-max/ghaction-github-pages@v1
         with:
           build_dir: target/doc
         env:
-          # TODO: Create a "public_repo" Personal Access Token with the
-          # "public_repo" scope - https://github.com/settings/tokens/new 
-          # TODO: give this repo a new "GH_PAGES_ACCESS_TOKEN" secret 
-          # https://github.com/Michael-F-Bryan/advent-of-code-2020/settings/secrets
-          # TODO: remove the space between "{ {"
-          GITHUB_PAT: ${ { secrets.GH_PAGES_ACCESS_TOKEN  }}
+          GITHUB_PAT: ${{ secrets.GH_PAGES_ACCESS_TOKEN  }}
 
