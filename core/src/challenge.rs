@@ -7,6 +7,8 @@ pub struct Example {
     pub expected: &'static str,
 }
 
+/// Iterate over all the challenges registered with the
+/// `#[aoc_macros::challenge]` macro.
 pub fn all_challenges() -> impl Iterator<Item = &'static Challenge> {
     inventory::iter::<Challenge>.into_iter()
 }

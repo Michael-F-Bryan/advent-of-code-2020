@@ -38,6 +38,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc-cli"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "aoc-challenges",
+ "structopt",
+]
+
+[[package]]
 name = "aoc-core"
 version = "0.1.0"
 dependencies = [

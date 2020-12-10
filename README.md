@@ -4,7 +4,7 @@
 
 ([API Docs])
 
-> **TODO:** Write up an interesting description.
+My implementation of the [2020 Advent of Code][website] challenges.
 
 ## License
 
@@ -32,3 +32,4 @@ do their best to avoid them, and welcome help in analysing and fixing them.
 
 [API Docs]: https://michael-f-bryan.github.io/advent-of-code-2020
 [crev]: https://github.com/crev-dev/cargo-crev
+[website]: https://adventofcode.com/2020/

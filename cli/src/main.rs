@@ -1,10 +1,5 @@
-pub mod day_1;
-pub mod day_2;
-
-use std::{fs::File, io::Read, path::PathBuf};
-
 use anyhow::{Context, Error};
-use aoc_core::all_challenges;
+use std::{fs::File, io::Read, path::PathBuf};
 use structopt::StructOpt;
 
 fn main() -> Result<(), Error> {
@@ -49,7 +44,7 @@ enum Command {
 }
 
 fn run_challenge<R: Read>(mut reader: R, challenge: &str) -> Result<(), Error> {
-    let challenge = all_challenges()
+    let challenge = aoc_challenges::all_challenges()
         .find(|c| c.number == challenge)
         .context("Unknown challenge number")?;
 
@@ -68,7 +63,7 @@ fn run_challenge<R: Read>(mut reader: R, challenge: &str) -> Result<(), Error> {
 }
 
 fn list_challenges() {
-    let mut challenges: Vec<_> = aoc_core::all_challenges().collect();
+    let mut challenges: Vec<_> = aoc_challenges::all_challenges().collect();
     challenges.sort_by_key(|c| c.number);
 
     for challenge in challenges {

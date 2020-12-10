@@ -29,7 +29,7 @@ use aoc_core::Lines;
 ///
 /// For example, suppose your expense report contained the following:
 ///
-/// ```
+/// ```text
 /// 1721
 /// 979
 /// 366
@@ -48,7 +48,7 @@ use aoc_core::Lines;
 ///
 /// Input:
 ///
-/// ```
+/// ```text
 /// 1721
 /// 979
 /// 366
@@ -59,7 +59,7 @@ use aoc_core::Lines;
 ///
 /// Expected:
 ///
-/// ```
+/// ```text
 /// 514579
 /// ```
 #[aoc_macros::challenge]
@@ -115,5 +115,5 @@ pub fn part_2(text: Lines<u32>) -> Result<u32, Error> {
         }
     }
 
-    anyhow::bail!("Unable to find any results")
+    Err(Error::msg("Unable to find any results")))
 }

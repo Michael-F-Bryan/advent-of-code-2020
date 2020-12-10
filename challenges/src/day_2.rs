@@ -25,7 +25,7 @@ use std::str::FromStr;
 ///
 /// For example, suppose you have the following list:
 ///
-/// ```
+/// ```text
 /// 1-3 a: abcde
 /// 1-3 b: cdefg
 /// 2-9 c: ccccccccc
@@ -72,7 +72,7 @@ pub fn part_1(lines: Lines<Input>) -> Result<usize, Error> {
 ///
 /// Given the same example list from above:
 ///
-/// ```
+/// ```text
 /// 1-3 a: abcde is valid: position 1 contains a and position 3 does not.
 /// 1-3 b: cdefg is invalid: neither position 1 nor position 3 contains b.
 /// 2-9 c: ccccccccc is invalid: both position 2 and position 9 contain c.

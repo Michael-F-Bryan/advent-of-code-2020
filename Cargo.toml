@@ -1,2 +1,2 @@
 [workspace]
-members = ["challenges", "core", "macros"]
+members = ["challenges", "cli", "core", "macros"]

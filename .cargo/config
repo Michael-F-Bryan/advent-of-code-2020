@@ -1,2 +1,2 @@
 [alias]
-challenge = ["run", "--bin", "aoc-challenges", "--"]
+challenge = ["run", "--bin", "aoc-cli", "--"]
