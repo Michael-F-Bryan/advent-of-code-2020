@@ -8,10 +8,7 @@ pub struct Example {
 }
 
 pub fn all_challenges() -> impl Iterator<Item = &'static Challenge> {
-    let mut challenges: Vec<_> =
-        inventory::iter::<Challenge>.into_iter().collect();
-    challenges.sort_by_key(|c| c.number);
-    challenges.into_iter()
+    inventory::iter::<Challenge>.into_iter()
 }
 
 #[derive(Copy, Clone)]

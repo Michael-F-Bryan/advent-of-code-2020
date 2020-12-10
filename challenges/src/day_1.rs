@@ -1,7 +1,7 @@
 use anyhow::Error;
 use aoc_core::Lines;
 
-/// Day 1a: Report Repair
+/// Day 1a: Report Repair (part 1)
 ///
 /// # Description
 ///
@@ -81,7 +81,7 @@ pub fn part_1(text: Lines<u32>) -> Result<u32, Error> {
     anyhow::bail!("Unable to find any results")
 }
 
-/// Day 1b: Report Repair
+/// Day 1b: Report Repair (part 2)
 ///
 /// # Description
 ///

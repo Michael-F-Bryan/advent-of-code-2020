@@ -54,7 +54,7 @@ fn parse_challenge(function: &ItemFn) -> Result<ChallengeInfo, Error> {
 
 fn parse_doc_comment(docs: &str) -> Result<(&str, &str, &str), Error> {
     static PATTERN: Lazy<Regex> = Lazy::new(|| {
-        Regex::new(r"(?i)day ([\d\w]+)\s*:\s*([\w \d]+)").unwrap()
+        Regex::new(r"(?im)day ([\d\w]+)\s*:\s*([^\n]+)$").unwrap()
     });
 
     if docs.is_empty() {

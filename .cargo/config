@@ -1,0 +1,2 @@
+[alias]
+challenge = ["run", "--bin", "aoc-challenges", "--"]

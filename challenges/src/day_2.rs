@@ -4,7 +4,7 @@ use once_cell::sync::Lazy;
 use regex::Regex;
 use std::str::FromStr;
 
-/// Day 2a: Password Philosophy
+/// Day 2a: Password Philosophy (part 1)
 ///
 /// # Description
 ///
@@ -52,7 +52,7 @@ pub fn part_1(lines: Lines<Input>) -> Result<usize, Error> {
         .count())
 }
 
-/// Day 2b: Password Philosophy
+/// Day 2b: Password Philosophy (part 2)
 ///
 /// # Description
 ///
