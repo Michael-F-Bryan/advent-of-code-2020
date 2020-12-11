@@ -115,5 +115,5 @@ pub fn part_2(text: Lines<u32>) -> Result<u32, Error> {
         }
     }
 
-    Err(Error::msg("Unable to find any results")))
+    Err(Error::msg("Unable to find any results"))
 }
