@@ -1,4 +1,7 @@
-use std::{env::current_dir, str::FromStr};
+use std::{
+    fmt::{self, Display, Formatter},
+    str::FromStr,
+};
 
 use anyhow::{Context, Error};
 
@@ -182,6 +185,22 @@ impl Board {
 
     fn index(&self, column: usize, row: usize) -> usize {
         column + row * self.width
+    }
+}
+
+impl Display for Board {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        for row in self.rows() {
+            for tile in row {
+                match tile {
+                    Tile::Tree => write!(f, "#")?,
+                    Tile::Open => write!(f, ".")?,
+                }
+            }
+            writeln!(f)?;
+        }
+
+        Ok(())
     }
 }
 
