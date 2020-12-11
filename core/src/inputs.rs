@@ -1,4 +1,4 @@
-use std::{ops::Deref, str::FromStr};
+use std::{convert::TryFrom, ops::Deref, str::FromStr};
 
 /// A specialised input for handling lists of items, where each item is on its
 /// own line.
@@ -11,6 +11,17 @@ where
     type Err = T::Err;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Lines::try_from(s)
+    }
+}
+
+impl<'input, T> TryFrom<&'input str> for Lines<T>
+where
+    T: FromStr,
+{
+    type Error = T::Err;
+
+    fn try_from(s: &'input str) -> Result<Self, Self::Error> {
         let mut items = Vec::new();
 
         for line in s.lines() {

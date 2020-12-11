@@ -118,7 +118,9 @@ impl ToTokens for ChallengeInfo {
                 description: #description,
                 examples: &[ #( #examples => #examples )*],
                 solve: |input| -> Result<String, anyhow::Error> {
-                    let input  = input.parse()?;
+                    use std::convert::TryInto as _;
+
+                    let input = input.try_into()?;
                     let result = #function_name(input)?;
 
                     Ok(result.to_string())

@@ -1,4 +1,5 @@
 use std::{
+    convert::TryFrom,
     fmt::{self, Display, Formatter},
     str::FromStr,
 };
@@ -208,6 +209,14 @@ impl FromStr for Board {
     type Err = Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Board::try_from(s)
+    }
+}
+
+impl<'input> TryFrom<&'input str> for Board {
+    type Error = Error;
+
+    fn try_from(s: &'input str) -> Result<Self, Self::Error> {
         let mut lines = s.lines().filter(|l| !l.is_empty());
 
         let mut tiles = Vec::new();
