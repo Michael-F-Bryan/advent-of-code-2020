@@ -1,7 +1,8 @@
-use std::{borrow::Borrow, hash::Hash};
+use std::{borrow::Borrow, convert::TryInto, hash::Hash, iter::FromIterator};
 use std::{collections::HashMap, convert::TryFrom, ops::Deref, str::FromStr};
 
 use anyhow::{Context, Error};
+use aoc_core::GroupedLines;
 
 /// Day 4a: Passport Processing
 ///
@@ -289,38 +290,39 @@ impl<'input> TryFrom<&'input str> for Passports<'input> {
     type Error = Error;
 
     fn try_from(value: &'input str) -> Result<Self, Self::Error> {
-        let mut passports = Vec::new();
-
-        let mut current_passport = Passport::default();
+        let groups: GroupedLines = value.try_into()?;
         let mut line_number = 0;
 
-        for line in value.lines() {
-            line_number += 1;
+        groups
+            .into_iter()
+            .map(|group| {
+                line_number += 1;
+                let mut passport = Passport::default();
 
-            if line.is_empty() {
-                passports.push(std::mem::take(&mut current_passport));
-                continue;
-            }
+                for line in group {
+                    for pair in line.split_whitespace() {
+                        let colon = pair.find(":").with_context(|| {
+                            format!(
+                            "Expected \"{}\" on line {} to look like \"key:value\"",
+                            pair, line_number
+                        )
+                        })?;
 
-            for pair in line.split_whitespace() {
-                let colon = pair.find(":").with_context(|| {
-                    format!(
-                        "Expected \"{}\" on line {} to look like \"key:value\"",
-                        pair, line_number
-                    )
-                })?;
+                        let (key, value) = pair.split_at(colon);
+                        let value = &value[1..];
+                        passport.fields.insert(key, value);
+                    }
+                }
 
-                let (key, value) = pair.split_at(colon);
-                let value = &value[1..];
-                current_passport.fields.insert(key, value);
-            }
-        }
+                Ok(passport)
+            })
+            .collect()
+    }
+}
 
-        if !current_passport.is_empty() {
-            passports.push(current_passport);
-        }
-
-        Ok(Passports(passports))
+impl<'input> FromIterator<Passport<'input>> for Passports<'input> {
+    fn from_iter<T: IntoIterator<Item = Passport<'input>>>(iter: T) -> Self {
+        Passports(iter.into_iter().collect())
     }
 }
 
@@ -334,6 +336,16 @@ impl<'input> Deref for Passport<'input> {
 
     fn deref(&self) -> &Self::Target {
         &self.fields
+    }
+}
+
+impl<'input> FromIterator<(&'input str, &'input str)> for Passport<'input> {
+    fn from_iter<T: IntoIterator<Item = (&'input str, &'input str)>>(
+        iter: T,
+    ) -> Self {
+        Passport {
+            fields: iter.into_iter().collect(),
+        }
     }
 }
 
@@ -412,4 +424,33 @@ fn validate_height(height: Height) -> Option<()> {
     };
 
     predicate(is_valid)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn parse_passport() {
+        let should_be: Passport = vec![
+            ("eyr", "1972"),
+            ("cid", "100"),
+            ("hcl", "#18171d"),
+            ("ecl", "amb"),
+            ("hgt", "170"),
+            ("pid", "186cm"),
+            ("iyr", "2018"),
+            ("byr", "1926"),
+        ]
+        .into_iter()
+        .collect();
+        let raw = r#"
+            eyr:1972 cid:100
+            hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926"#;
+
+        let got = Passports::try_from(raw).unwrap();
+
+        assert_eq!(got.len(), 1);
+        assert_eq!(got[0], should_be);
+    }
 }

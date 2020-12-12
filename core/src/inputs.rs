@@ -51,3 +51,37 @@ impl<T> IntoIterator for Lines<T> {
         self.0.into_iter()
     }
 }
+
+pub struct GroupedLines<'input>(std::str::Lines<'input>);
+
+impl<'input> TryFrom<&'input str> for GroupedLines<'input> {
+    type Error = std::convert::Infallible;
+
+    fn try_from(value: &'input str) -> Result<Self, Self::Error> {
+        Ok(GroupedLines(value.lines()))
+    }
+}
+
+impl<'input> Iterator for GroupedLines<'input> {
+    type Item = Vec<&'input str>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let mut group = Vec::new();
+
+        while let Some(line) = self.0.next() {
+            if group.is_empty() && line.is_empty() {
+                continue;
+            } else if line.is_empty() {
+                break;
+            } else {
+                group.push(line);
+            }
+        }
+
+        if group.is_empty() {
+            None
+        } else {
+            Some(group)
+        }
+    }
+}
