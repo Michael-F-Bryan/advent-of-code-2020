@@ -9,6 +9,7 @@ edition = "2018"
 anyhow = "1.0.35"
 aoc-core = {path = "../core"}
 aoc-macros = {path = "../macros"}
+bitvec = "0.19.4"
 inventory = "0.1.9"
 once_cell = "1.5.2"
 regex = "1.4.2"
