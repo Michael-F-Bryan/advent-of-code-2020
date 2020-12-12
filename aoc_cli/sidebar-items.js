@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Command",""]],"fn":[["list_challenges",""],["main",""],["run_challenge",""]]});

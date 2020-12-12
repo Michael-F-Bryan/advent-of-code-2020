@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["all_challenges","Iterate over all the challenges registered with the `#[aoc_macros::challenge]` macro."]],"struct":[["Challenge",""],["Example",""],["GroupedLines",""],["Lines","A specialised input for handling lists of items, where each item is on its own line."]]});

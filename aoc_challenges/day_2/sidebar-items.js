@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["part_1","Day 2a: Password Philosophy (part 1)"],["part_2","Day 2b: Password Philosophy (part 2)"]],"struct":[["Input",""],["Rule",""]]});

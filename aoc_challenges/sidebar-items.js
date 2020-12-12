@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["all_challenges","Iterate over all the challenges registered with the `#[aoc_macros::challenge]` macro."]],"mod":[["day_1",""],["day_2",""],["day_3",""],["day_4",""],["day_5",""],["day_6",""]]});

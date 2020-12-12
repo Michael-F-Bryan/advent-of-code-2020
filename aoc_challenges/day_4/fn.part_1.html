@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `part_1` fn in crate `aoc_challenges`."><meta name="keywords" content="rust, rustlang, rust-lang, part_1"><title>aoc_challenges::day_4::part_1 - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
+<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc fn"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../aoc_challenges/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a><div class="sidebar-elems"><p class="location"><a href="../index.html">aoc_challenges</a>::<wbr><a href="index.html">day_4</a></p><script>window.sidebarCurrent = {name: "part_1", ty: "fn", relpath: ""};</script><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button class="help-button">?</button>
+                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../src/aoc_challenges/day_4.rs.html#77-88" title="goto source code">[src]</a></span><span class="in-band">Function <a href="../index.html">aoc_challenges</a>::<wbr><a href="index.html">day_4</a>::<wbr><a class="fn" href="">part_1</a></span></h1><pre class="rust fn">pub fn part_1(passports: <a class="struct" href="../../aoc_challenges/day_4/struct.Passports.html" title="struct aoc_challenges::day_4::Passports">Passports</a>&lt;'_&gt;) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <a class="struct" href="../../anyhow/struct.Error.html" title="struct anyhow::Error">Error</a>&gt;</pre><div class="docblock"><p>Day 4a: Passport Processing</p>
+<h1 id="description" class="section-header"><a href="#description">Description</a></h1>
+<p>You arrive at the airport only to realize that you grabbed your North Pole
+Credentials instead of your passport. While these documents are extremely
+similar, North Pole Credentials aren't issued by a country and therefore
+aren't actually valid documentation for travel in most of the world.</p>
+<p>It seems like you're not the only one having problems, though; a very long
+line has formed for the automatic passport scanners, and the delay could
+upset your travel itinerary.</p>
+<p>Due to some questionable network security, you realize you might be able to
+solve both of these problems at the same time.</p>
+<p>The automatic passport scanners are slow because they're having trouble
+detecting which passports have all required fields. The expected fields are
+as follows:</p>
+<pre><code class="language-text">byr (Birth Year)
+iyr (Issue Year)
+eyr (Expiration Year)
+hgt (Height)
+hcl (Hair Color)
+ecl (Eye Color)
+pid (Passport ID)
+cid (Country ID)
+</code></pre>
+<p>Passport data is validated in batch files (your puzzle input). Each passport
+is represented as a sequence of key:value pairs separated by spaces or
+newlines. Passports are separated by blank lines.</p>
+<p>Here is an example batch file containing four passports:</p>
+<pre><code class="language-text">ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+byr:1937 iyr:2017 cid:147 hgt:183cm
+
+iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
+hcl:#cfa07d byr:1929
+
+hcl:#ae17e1 iyr:2013
+eyr:2024
+ecl:brn pid:760753108 byr:1931
+hgt:179cm
+
+hcl:#cfa07d eyr:2025 pid:166559648
+iyr:2011 ecl:brn hgt:59in
+</code></pre>
+<p>The first passport is valid - all eight fields are present. The second
+passport is invalid - it is missing hgt (the Height field).</p>
+<p>The third passport is interesting; the only missing field is cid, so it looks
+like data from North Pole Credentials, not a passport at all! Surely, nobody
+would mind if you made the system temporarily ignore missing cid fields.
+Treat this &quot;passport&quot; as valid.</p>
+<p>The fourth passport is missing two fields, cid and byr. Missing cid is fine,
+but missing any other field is not, so this passport is invalid.</p>
+<p>According to the above rules, your improved system would report 2 valid
+passports.</p>
+<p>Count the number of valid passports - those that have all required fields.
+Treat cid as optional. In your batch file, how many passports are valid?</p>
+</div></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "aoc_challenges";</script><script src="../../main.js"></script><script defer src="../../search-index.js"></script></body></html>

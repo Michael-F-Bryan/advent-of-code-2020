@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Height",""]],"fn":[["between",""],["check",""],["decimal_number_with_length",""],["is_digit",""],["is_one_of",""],["parse",""],["part_1","Day 4a: Passport Processing"],["part_2","Day 4b: Passport Processing (part 2)"],["require_key",""]],"struct":[["Colour",""],["Passport",""],["Passports",""]]});
